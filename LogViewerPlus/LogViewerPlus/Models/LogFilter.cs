@@ -34,7 +34,7 @@ namespace LogViewerPlus.Models
         }
         public int WarningCount
         {
-            get { return noneCount; }
+            get { return warningCount; }
             set { Set(() => WarningCount, ref warningCount, value); }
         }
         public int InfoCount
@@ -62,13 +62,13 @@ namespace LogViewerPlus.Models
 
         public bool IsWarningSelected
         {
-            get { return isNoneSelected; }
+            get { return isWarningSelected; }
             set { Set(() => IsWarningSelected, ref isWarningSelected, value); }
         }
 
         public bool IsInfoSelected
         {
-            get { return isNoneSelected; }
+            get { return isInfoSelected; }
             set { Set(() => IsInfoSelected, ref isInfoSelected, value); }
         }
 

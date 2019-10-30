@@ -100,6 +100,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToImageConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\MessageTypeToColorConverter.cs" />
     <Compile Include="Converters\MessageTypeToVisibilityMultiConverter.cs" />
     <Compile Include="Enums\MessageType.cs" />
@@ -187,6 +189,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\button_blank_green_14986.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\button_blank_gray_14985.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

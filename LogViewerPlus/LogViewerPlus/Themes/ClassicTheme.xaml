@@ -9,7 +9,11 @@
                                       Margin="{TemplateBinding Padding}"
                                       RecognizesAccessKey="True"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    </ContentPresenter>
+                    <ControlTemplate.Triggers>
+                        
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -59,5 +63,25 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <Style x:Key="imgVisible" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource messageFilter}">
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <Image Visibility="Visible"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Content">
+                    <Setter.Value>
+                        <Image Visibility="Hidden"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
 
 </ResourceDictionary>

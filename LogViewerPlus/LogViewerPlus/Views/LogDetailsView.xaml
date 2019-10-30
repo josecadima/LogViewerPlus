@@ -14,48 +14,66 @@
     <UserControl.Resources>
         <converters:MessageTypeToColorConverter x:Key="messageTypeToColorConverter"/>
         <converters:MessageTypeToVisibilityMultiConverter x:Key="messageTypeToVisibilityMultiConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+        <converters:BoolToImageConverter x:Key="boolToImageConverter"/>
     </UserControl.Resources>
 
     <DockPanel LastChildFill="True" DataContext="{Binding SelectedLogFile}" Background="#FFF7F7F2">
 
 
         <StackPanel DockPanel.Dock="Top" Height="35" HorizontalAlignment="Stretch" Background="#FFDADBDF">
-            <Label Content="Log Viewer Plus" FontFamily="Rockwell" FontSize="16" Foreground="Black" HorizontalAlignment="Center"/>
+            <Label Content="Log Viewer Plus" FontFamily="Arial" FontSize="16" Foreground="Black" HorizontalAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,15,0,0" Width="110" VerticalAlignment="Top">
-            <ToggleButton Content="{Binding Filters.ErrorCount}" ContentStringFormat="Error ({0})" HorizontalAlignment="Left" Margin="0,0,15,15"
-                     Style="{StaticResource errorFilter}" IsChecked="{Binding Filters.IsErrorSelected}" FontFamily="Rockwell"
+        <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,20,0,0" Width="130" VerticalAlignment="Top">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                <Image Visibility="{Binding Filters.IsErrorSelected,Converter={StaticResource boolToVisibilityConverter}}" Height="15" Width="15" Source="{Binding Filters.IsErrorSelected,Converter={StaticResource boolToImageConverter}}" Margin="0,0,5,0"/>
+                <ToggleButton Content="{Binding Filters.ErrorCount}" ContentStringFormat="Error ({0})" HorizontalAlignment="Left"
+                     Style="{StaticResource errorFilter}" IsChecked="{Binding Filters.IsErrorSelected}" FontFamily="Arial"
                      Command="{Binding DataContext.ChangeFilterSelection, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Foreground="Red"/>
-
-            <ToggleButton Content="{Binding Filters.WarningCount}" ContentStringFormat="Warning ({0})" HorizontalAlignment="Left" Margin="0,0,15,15"
-                     Style="{StaticResource warningFilter}" IsChecked="{Binding Filters.IsWarningSelected}" FontFamily="Rockwell"
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                <Image Visibility="{Binding Filters.IsWarningSelected,Converter={StaticResource boolToVisibilityConverter}}" Height="15" Width="15" Source="{Binding Filters.IsWarningSelected,Converter={StaticResource boolToImageConverter}}" Margin="0,0,5,0"/>
+                <ToggleButton Content="{Binding Filters.WarningCount}" ContentStringFormat="Warning ({0})" HorizontalAlignment="Left"
+                     Style="{StaticResource warningFilter}" IsChecked="{Binding Filters.IsWarningSelected}" FontFamily="Arial"
                      Command="{Binding DataContext.ChangeFilterSelection, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Foreground="Orange"/>
+            </StackPanel>
 
-            <ToggleButton Content="{Binding Filters.DebugCount}" ContentStringFormat="Debug ({0})" HorizontalAlignment="Left" Margin="0,0,15,15"
-                     Style="{StaticResource debugFilter}" IsChecked="{Binding Filters.IsDebugSelected}" FontFamily="Rockwell"
-                     Command="{Binding DataContext.ChangeFilterSelection, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Foreground="Blue"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                <Image Visibility="{Binding Filters.IsDebugSelected,Converter={StaticResource boolToVisibilityConverter}}" Height="15" Width="15" Source="{Binding Filters.IsDebugSelected,Converter={StaticResource boolToImageConverter}}" Margin="0,0,5,0" />
+                <ToggleButton Content="{Binding Filters.DebugCount}" ContentStringFormat="Debug ({0})" HorizontalAlignment="Left" 
+                     Style="{StaticResource debugFilter}" IsChecked="{Binding Filters.IsDebugSelected}" FontFamily="Arial"
+                     Command="{Binding DataContext.ChangeFilterSelection, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Foreground="Blue" Margin="0,0,5,0"/>
+            </StackPanel>
 
-            <ToggleButton Content="{Binding Filters.InfoCount}" ContentStringFormat="Info ({0})" HorizontalAlignment="Left" Margin="0,0,15,15"
-                     Style="{StaticResource infoFilter}" IsChecked="{Binding Filters.IsInfoSelected}" FontFamily="Rockwell"
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                <Image Visibility="{Binding Filters.IsInfoSelected , Converter={StaticResource boolToVisibilityConverter}}" Height="15" Width="15" Source="{Binding Filters.IsInfoSelected,Converter={StaticResource boolToImageConverter}}" Margin="0,0,5,0"/>
+                <ToggleButton Content="{Binding Filters.InfoCount}" ContentStringFormat="Info ({0})" HorizontalAlignment="Left" 
+                     Style="{StaticResource infoFilter}" IsChecked="{Binding Filters.IsInfoSelected}" FontFamily="Arial"
                      Command="{Binding DataContext.ChangeFilterSelection, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Foreground="Green"/>
+            </StackPanel>
 
-            <ToggleButton Content="{Binding Filters.NoneCount}" ContentStringFormat="None ({0})" HorizontalAlignment="Left" Margin="0,0,10,10"
-                     Style="{StaticResource noneFilter}" IsChecked="{Binding Filters.IsNoneSelected}" FontFamily="Rockwell"
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
+                <Image Visibility="{Binding Filters.IsNoneSelected,Converter={StaticResource boolToVisibilityConverter}}" Height="15" Width="15" Source="{Binding Filters.IsNoneSelected,Converter={StaticResource boolToImageConverter}}"  Margin="0,0,5,0"/>
+                <ToggleButton Content="{Binding Filters.NoneCount}" ContentStringFormat="None ({0})" HorizontalAlignment="Left"
+                     Style="{StaticResource noneFilter}" IsChecked="{Binding Filters.IsNoneSelected}" FontFamily="Arial" 
                      Command="{Binding DataContext.ChangeFilterSelection, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Foreground="Black"/>
-        </StackPanel>
+            </StackPanel>
+        </DockPanel>
 
         <StackPanel DockPanel.Dock="Bottom" Height="40" Orientation="Horizontal" Margin="20,10,10,10" >
-            <Label Content="Log File:" FontFamily="Rockwell" FontSize="12" Foreground="Black" Width="58"/>
-            <Label Content="{Binding FilePath}" FontFamily="Rockwell" FontSize="12" Foreground="Black"/>
+            <Label Content="Log File:" FontFamily="Arial" FontSize="12" Foreground="Black" Width="58"/>
+            <Label Content="{Binding FilePath}" FontFamily="Arial" FontSize="12" Foreground="Black"/>
         </StackPanel>
 
         <TextBox DockPanel.Dock="Bottom" Text="{Binding SelectedLogEntry.Message}" Height="140" Margin="20,5"
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     TextWrapping="Wrap"  IsReadOnly="True" FontFamily="Rockwell" FontSize="11" BorderBrush="#FF131415" OpacityMask="#FF090909" Background="#FFFFFF"/>
+                     TextWrapping="Wrap"  IsReadOnly="True" FontFamily="Arial" FontSize="11" BorderBrush="#FF131415" OpacityMask="#FF090909" Background="#FFFFFF"/>
+        
         <ListView  ItemsSource="{Binding FilteredFileEntries}"
                   SelectedItem="{Binding SelectedLogEntry}"
-                  VirtualizingPanel.IsVirtualizing="True" Margin="20,10" BorderBrush="#FF09090A" FontFamily="Rockwell" FontSize="11" OpacityMask="#FF080808" Background="#FFFFFF">
+                  VirtualizingPanel.IsVirtualizing="True" Margin="20,10" BorderBrush="#FF09090A" FontFamily="Arial" FontSize="11" OpacityMask="#FF080808" Background="#FFFFFF">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="BorderThickness" Value="0"/>
