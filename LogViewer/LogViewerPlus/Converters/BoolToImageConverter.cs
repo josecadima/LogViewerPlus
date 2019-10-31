@@ -18,12 +18,12 @@ namespace LogViewerPlus.Converters
 
             bool result;
             if (!Boolean.TryParse(value.ToString(), out result))
-                return "/Images/button_blank_green_14986.ico";
+                return "/Images/button_blank_green.ico";
 
             if (result)
-                return "/Images/button_blank_green_14986.ico";
+                return "/Images/button_blank_green.ico";
 
-            return "/Images/button_blank_gray_14985.ico";
+            return "/Images/button_blank_gray.ico";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

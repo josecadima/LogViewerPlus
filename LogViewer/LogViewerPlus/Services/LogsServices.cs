@@ -20,7 +20,7 @@ namespace LogViewerPlus.Services
         public LogsServices()
         {
             range = new List<DateTime>();
-            range.Add(DateTime.UtcNow.AddDays(-3));
+            range.Add(DateTime.UtcNow.AddDays(-5));
             range.Add(DateTime.UtcNow);
         }
 

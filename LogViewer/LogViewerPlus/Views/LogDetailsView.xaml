@@ -22,7 +22,7 @@
 
 
         <StackPanel DockPanel.Dock="Top" Height="35" HorizontalAlignment="Stretch" Background="#FFDADBDF">
-            <Label Content="Log Viewer Plus" FontFamily="Arial" FontSize="16" Foreground="Black" HorizontalAlignment="Center"/>
+            <Label Content="Log Viewer" FontFamily="Arial" FontSize="16" Foreground="Black" HorizontalAlignment="Center"/>
         </StackPanel>
 
         <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,20,0,0" Width="130" VerticalAlignment="Top">

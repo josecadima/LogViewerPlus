@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:LogViewerPlus.Views"
         mc:Ignorable="d"
         DataContext="{Binding MainVM,Source={StaticResource Locator}}"
-        Title="LogViewerPlus 1.0" FontFamily="Rockwell" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="Log Viewer 1.0" FontFamily="Rockwell" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
     <views:LogDetailsView DataContext="{Binding LogVM}" Margin="0,0,0.333,-0.333">
        
     </views:LogDetailsView>

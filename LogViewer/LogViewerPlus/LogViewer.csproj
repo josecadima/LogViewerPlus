@@ -53,8 +53,8 @@
     <ApplicationIcon>findinfolder_102740.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -164,18 +164,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="multimediaphotoviewer_104352.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Logo_logsViewerPlus.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Search_find_4120.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="-eye_90911.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="findinfolder_102740.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -191,10 +179,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\button_blank_green_14986.ico" />
+    <Resource Include="Images\button_blank_green.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\button_blank_gray_14985.ico" />
+    <Resource Include="Images\button_blank_gray.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\check_40622.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\button_blank_blue.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
