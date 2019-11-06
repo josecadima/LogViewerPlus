@@ -77,7 +77,7 @@ namespace LogViewerPlus.Services
         {
             entry = new LogFileEntry();
 
-            var regex = new Regex(@"(.*) \[(ERROR|WARM|DEBUG|INFO)\] ([a-z,A-Z,0-9,:,;,_,(,),@,�,&,/,!,\-,\*,\\,',\s]*)\.(.*)");
+            var regex = new Regex(@"(.*) \[(ERROR|WARN|DEBUG|INFO)\] ([a-z,A-Z,0-9,:,;,_,(,),@,�,&,/,!,\-,\*,\\,',\s]*)\.(.*)");
 
             Match match = regex.Match(line);
             if (!match.Success || match.Groups.Count < 5)
@@ -87,7 +87,7 @@ namespace LogViewerPlus.Services
                 entry.MessageType = MessageType.Error;
             else if (match.Groups[2].Value == "DEBUG")
                 entry.MessageType = MessageType.Debug;
-            else if (match.Groups[2].Value == "WARM")
+            else if (match.Groups[2].Value == "WARN")
                 entry.MessageType = MessageType.Warning;
             else if (match.Groups[2].Value == "INFO")
                 entry.MessageType = MessageType.Info;

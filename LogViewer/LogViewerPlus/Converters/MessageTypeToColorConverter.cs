@@ -22,11 +22,11 @@ namespace LogViewerPlus.Converters
             else if (value.ToString() == "Error")
                 color = new SolidColorBrush(Colors.Red);
             else if (value.ToString() == "Warning")
-                color = new SolidColorBrush(Colors.Green);
+                color = new SolidColorBrush(Colors.Orange);
             else if (value.ToString() == "Debug")
                 color = new SolidColorBrush(Colors.Blue);
             else if (value.ToString() == "Info")
-                color = new SolidColorBrush(Colors.LightBlue);
+                color = new SolidColorBrush(Colors.Green);
             else
                 color = new SolidColorBrush(Colors.Black);
 

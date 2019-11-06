@@ -39,7 +39,7 @@ namespace LogViewerPlus.Models
         }
         public int InfoCount
         {
-            get { return noneCount; }
+            get { return infoCount; }
             set { Set(() => InfoCount, ref infoCount, value); }
         }
         public int ErrorCount
