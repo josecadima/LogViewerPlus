@@ -195,5 +195,12 @@
   <ItemGroup>
     <Resource Include="Images\button_blank_blue.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1490793870-user-interface25_82355.ico" />
+    <Resource Include="Images\Search_find_3519.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\refresh_icon-icons.com_50052.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -21,9 +21,9 @@
     <DockPanel LastChildFill="True" DataContext="{Binding SelectedLogFile}" Background="#FFF7F7F2">
 
 
-        <StackPanel DockPanel.Dock="Top" Height="35" HorizontalAlignment="Stretch" Background="#FFDADBDF">
+        <DockPanel LastChildFill="True" DockPanel.Dock="Top" Height="35" Background="#FFDADBDF">
             <Label Content="Log Viewer" FontFamily="Arial" FontSize="16" Foreground="Black" HorizontalAlignment="Center"/>
-        </StackPanel>
+        </DockPanel>
 
         <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,20,0,0" Width="130" VerticalAlignment="Top">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
@@ -32,7 +32,7 @@
                      Style="{StaticResource errorFilter}" IsChecked="{Binding Filters.IsErrorSelected}" FontFamily="Arial"
                      Command="{Binding DataContext.ChangeFilterSelection, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Foreground="Red"/>
             </StackPanel>
-            
+
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
                 <Image Visibility="{Binding Filters.IsWarningSelected,Converter={StaticResource boolToVisibilityConverter}}" Height="15" Width="15" Source="{Binding Filters.IsWarningSelected,Converter={StaticResource boolToImageConverter}}" Margin="0,0,5,0"/>
                 <ToggleButton Content="{Binding Filters.WarningCount}" ContentStringFormat="Warning ({0})" HorizontalAlignment="Left"
@@ -70,7 +70,38 @@
         <TextBox DockPanel.Dock="Bottom" Text="{Binding SelectedLogEntry.Message}" Height="140" Margin="20,5"
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"
                      TextWrapping="Wrap"  IsReadOnly="True" FontFamily="Arial" FontSize="11" BorderBrush="#FF131415" OpacityMask="#FF090909" Background="#FFFFFF"/>
-        
+
+        <DockPanel LastChildFill="True"  DockPanel.Dock="Top" Height="25" Margin="25,5,5,5">
+            
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button Content="Refresh" Command="{Binding DataContext.RefreshCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Height="20" Margin="2">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="/Images/refresh_icon-icons.com_50052.ico"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Button Content="Find" Command="{Binding DataContext.SearchCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Height="18" Margin="2">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="/Images/Search_find_3519.ico"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <Label Content="Search" FontFamily="Arial" FontSize="12" Foreground="Black" />
+                <TextBox x:Name="tbxSearch"  Text="{Binding SearchLine}" Height="20" Margin="2" Width="210"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            </StackPanel>
+            
+        </DockPanel>
+
         <ListView  ItemsSource="{Binding FilteredFileEntries}"
                   SelectedItem="{Binding SelectedLogEntry}"
                   VirtualizingPanel.IsVirtualizing="True" Margin="20,10" BorderBrush="#FF09090A" FontFamily="Arial" FontSize="11" OpacityMask="#FF080808" Background="#FFFFFF">

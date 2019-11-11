@@ -153,6 +153,44 @@ namespace LogViewerPlus.Services
             }
 
             return files;
+        }
+        public List<LogFileEntry> SearchLogFileEntries(string logPath, string line)
+        {
+            var logEntries = new List<LogFileEntry>();
+
+            try
+            {
+                Log.DebugFormat("Searching logs from {0}.", logPath);
+
+                string text = this.ReadFile(logPath, range);
+
+                string[] lines = Regex.Split(text, @"(?<!\d)(?=\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},[\d{5|\d{4}|\d{3}}])");
+
+                for (int l = lines.Length - 1; l >= 0; l--)
+                {
+                    if (string.IsNullOrEmpty(lines[l]) || lines[l].Length <= 30)
+                        continue;
+
+                    var regex = new Regex("\r\n");
+                    var formatedLine = regex.Replace(lines[l], string.Empty, 1);
+
+                    LogFileEntry logEntry;
+
+                    if (this.MatchMessage(formatedLine, out logEntry))
+                    {
+                        if (formatedLine.Contains(line))
+                            logEntries.Add(logEntry);
+                    }
+                }
+
+                Log.Info("Success searching logs.");
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed serching logs.", e);
+            }
+
+            return logEntries;
 
         }
     }

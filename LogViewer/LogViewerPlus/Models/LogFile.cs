@@ -27,6 +27,8 @@ namespace LogViewerPlus.Models
 
         public string ShortDate { get; set; }
 
+        public string SearchLine { get; set; }
+
         public List<LogFileEntry> LogFileEntries
         {
             get { return logFileEntries; }
