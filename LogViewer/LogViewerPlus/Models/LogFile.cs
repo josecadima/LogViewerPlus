@@ -2,9 +2,6 @@
 using LogViewerPlus.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogViewerPlus.Models
 {
@@ -28,6 +25,8 @@ namespace LogViewerPlus.Models
         public string ShortDate { get; set; }
 
         public string SearchLine { get; set; }
+
+        public string RDLogFilePath { get; set; }
 
         public List<LogFileEntry> LogFileEntries
         {

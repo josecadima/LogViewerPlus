@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using log4net;
+﻿using log4net;
 using LogViewerPlus.Enums;
 using LogViewerPlus.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LogViewerPlus.Services
 {
@@ -17,10 +15,14 @@ namespace LogViewerPlus.Services
 
         private List<DateTime> range;
 
+        public string DaysForDate { get; set; }
+
         public LogsServices()
         {
+            DaysForDate = System.Configuration.ConfigurationManager.AppSettings["DaysForDate"].ToString();
+
             range = new List<DateTime>();
-            range.Add(DateTime.UtcNow.AddDays(-5));
+            range.Add(DateTime.UtcNow.AddDays(Convert.ToInt32(DaysForDate) * -1));
             range.Add(DateTime.UtcNow);
         }
 
@@ -178,7 +180,7 @@ namespace LogViewerPlus.Services
 
                     if (this.MatchMessage(formatedLine, out logEntry))
                     {
-                        if (formatedLine.Contains(line))
+                        if (formatedLine.ToString().Contains(line) || formatedLine.ToLower().Contains(line))
                             logEntries.Add(logEntry);
                     }
                 }
@@ -191,7 +193,6 @@ namespace LogViewerPlus.Services
             }
 
             return logEntries;
-
         }
     }
    

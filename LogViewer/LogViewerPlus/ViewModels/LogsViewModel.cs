@@ -1,14 +1,13 @@
-﻿using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using LogViewerPlus.Enums;
 using LogViewerPlus.Models;
 using LogViewerPlus.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 
 namespace LogViewerPlus.ViewModels
 {
@@ -16,6 +15,10 @@ namespace LogViewerPlus.ViewModels
     {
         private LogsServices logsServices;
         private LogFile selectedLogFile;
+        private string serverName = System.Configuration.ConfigurationManager.AppSettings["ServerName"];
+        private string remoteLogPath = System.Configuration.ConfigurationManager.AppSettings["RemoteLogPath"];
+        private string localLogPath = System.Configuration.ConfigurationManager.AppSettings["LocallogsPath"];
+
 
         public RelayCommand RefreshCommand { get; set; }
 
@@ -23,6 +26,7 @@ namespace LogViewerPlus.ViewModels
 
         public RelayCommand SearchCommand { get; set; }
 
+        public RelayCommand CopyCommand { get; set; }
         public LogFile SelectedLogFile
         {
             get { return selectedLogFile; }
@@ -36,6 +40,7 @@ namespace LogViewerPlus.ViewModels
             this.ChangeFilterSelection = new RelayCommand(UpdateLogEntries);
             this.RefreshCommand = new RelayCommand(RefreshLogEntries);
             this.SearchCommand = new RelayCommand(SearchLogs);
+            this.CopyCommand = new RelayCommand(CopyLogsFile);
 
             this.UpdateData();
 
@@ -43,10 +48,11 @@ namespace LogViewerPlus.ViewModels
 
         private void UpdateData()
         {
-            this.SelectedLogFile = new LogFile() { FilePath = System.Configuration.ConfigurationManager.AppSettings["LogsPath"] };
+            this.SelectedLogFile = new LogFile() { FilePath = System.Configuration.ConfigurationManager.AppSettings["LocallogsPath"] };
 
             this.UpdateLogEntries();
         }
+
         public async void UpdateLogEntries()
         {
             List<LogFileEntry> filteredEntries = new List<LogFileEntry>();
@@ -77,6 +83,7 @@ namespace LogViewerPlus.ViewModels
 
             this.SelectedLogFile.FilteredFileEntries = filteredEntries;
         }
+
         public async void RefreshLogEntries()
         {
             List<LogFileEntry> filteredEntries = new List<LogFileEntry>();
@@ -104,6 +111,7 @@ namespace LogViewerPlus.ViewModels
 
             this.SelectedLogFile.FilteredFileEntries = filteredEntries;
         }
+
         public async void SearchLogs()
         {
             List<LogFileEntry> searchedEntries = new List<LogFileEntry>();
@@ -131,6 +139,31 @@ namespace LogViewerPlus.ViewModels
 
             this.SelectedLogFile.FilteredFileEntries = searchedEntries;
 
+        }
+
+        public void CopyLogsFile()
+        {
+            string sourcePath = String.Format(@"\\{0}\{1}", serverName, remoteLogPath);
+            string targetPath = String.Format(@"{0}",localLogPath);
+
+            try
+            {
+                if(Path.GetExtension(targetPath) == "")
+                {
+                    Path.Combine(targetPath, Path.GetFileName(sourcePath));
+                }
+                if(Directory.Exists(sourcePath))
+                {
+                    foreach (string sourceFilePath in Directory.GetFiles(sourcePath, "*Emerge*", SearchOption.AllDirectories))
+                    {
+                        File.Copy(sourceFilePath, sourceFilePath.Replace(sourcePath,targetPath), true);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }
     }
 }

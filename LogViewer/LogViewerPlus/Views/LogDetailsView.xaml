@@ -1,13 +1,9 @@
 ﻿<UserControl x:Class="LogViewerPlus.Views.LogDetailsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LogViewerPlus.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:LogViewerPlus.Converters"
-             xmlns:vm="clr-namespace:LogViewerPlus.ViewModels"
-             xmlns:mod="clr-namespace:LogViewerPlus.Models"
-             xmlns:serv="clr-namespace:LogViewerPlus.Services"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1000">
 
@@ -25,7 +21,7 @@
             <Label Content="Log Viewer" FontFamily="Arial" FontSize="16" Foreground="Black" HorizontalAlignment="Center"/>
         </DockPanel>
 
-        <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,20,0,0" Width="130" VerticalAlignment="Top">
+        <DockPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,50,0,0" Width="130" VerticalAlignment="Top">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5">
                 <Image Visibility="{Binding Filters.IsErrorSelected,Converter={StaticResource boolToVisibilityConverter}}" Height="15" Width="15" Source="{Binding Filters.IsErrorSelected,Converter={StaticResource boolToImageConverter}}" Margin="0,0,5,0"/>
                 <ToggleButton Content="{Binding Filters.ErrorCount}" ContentStringFormat="Error ({0})" HorizontalAlignment="Left"
@@ -62,7 +58,7 @@
             </StackPanel>
         </DockPanel>
 
-        <StackPanel DockPanel.Dock="Bottom" Height="40" Orientation="Horizontal" Margin="20,10,10,10" >
+        <StackPanel DockPanel.Dock="Bottom" Height="40" Orientation="Horizontal" Margin="20,10,20,10" >
             <Label Content="Log File:" FontFamily="Arial" FontSize="12" Foreground="Black" Width="58"/>
             <Label Content="{Binding FilePath}" FontFamily="Arial" FontSize="12" Foreground="Black"/>
         </StackPanel>
@@ -71,10 +67,18 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"
                      TextWrapping="Wrap"  IsReadOnly="True" FontFamily="Arial" FontSize="11" BorderBrush="#FF131415" OpacityMask="#FF090909" Background="#FFFFFF"/>
 
-        <DockPanel LastChildFill="True"  DockPanel.Dock="Top" Height="25" Margin="25,5,5,5">
-            
+        <DockPanel LastChildFill="True"  DockPanel.Dock="Top" Height="25" Margin="25,10,20,0">
+
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Button Content="Refresh" Command="{Binding DataContext.RefreshCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Height="20" Margin="2">
+                <Button Command="{Binding DataContext.CopyCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Height="20" Margin="2" Background="Black">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="/Images/copy.ico"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                
+                <Button Command="{Binding DataContext.RefreshCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Height="20" Margin="2" Background="Black">
                     <Button.Template>
                         <ControlTemplate>
                             <Image Source="/Images/refresh_icon-icons.com_50052.ico"/>
@@ -82,22 +86,17 @@
                     </Button.Template>
                 </Button>
             </StackPanel>
-            
+
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Button Content="Find" Command="{Binding DataContext.SearchCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Height="18" Margin="2">
+                <Label Content="Search" FontFamily="Arial" FontSize="12" Foreground="Black" />
+                <TextBox x:Name="tbxSearch"  Text="{Binding SearchLine}" Height="20" Margin="2" Width="250"/>
+                <Button Command="{Binding DataContext.SearchCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" Height="18" Margin="2" Background="Black">
                     <Button.Template>
                         <ControlTemplate>
                             <Image Source="/Images/Search_find_3519.ico"/>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-            </StackPanel>
-
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                <Label Content="Search" FontFamily="Arial" FontSize="12" Foreground="Black" />
-                <TextBox x:Name="tbxSearch"  Text="{Binding SearchLine}" Height="20" Margin="2" Width="210"/>
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
             </StackPanel>
             
         </DockPanel>
